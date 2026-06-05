@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RL Codexa – IT Training Company</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="./logo.png" type="image/x-icon">
 </head>
+
 <body>
 
   <!-- ── CURSOR ── -->
@@ -22,7 +27,9 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#home" class="nav-logo">
-        <span class="logo-bracket">[</span>RL<span class="logo-accent">CODEXA</span><span class="logo-bracket">]</span>
+        <span class="logo-bracket">
+          <img src="./logo.png" alt="Logo" class="logo" />
+        </span>
       </a>
       <ul class="nav-links">
         <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
@@ -61,18 +68,22 @@
         <span class="hero-line" data-delay="300">with Industry Skills</span>
       </h1>
       <p class="hero-sub">
-        RL Codexa partners with colleges to deliver certified, hands-on technology training in Python, Full Stack, Java, AI, AWS & DevOps — all within a structured 1-year program.
+        RL Codexa partners with colleges to deliver certified, hands-on technology training in Python, Full Stack, Java,
+        AI, AWS & DevOps — all within a structured 1-year program.
       </p>
       <div class="hero-actions">
         <a href="#courses" class="btn-primary">Explore Courses <span class="btn-arrow">→</span></a>
         <a href="#process" class="btn-ghost">College Tie-Up →</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-num" data-target="6">0</span><span class="stat-plus">+</span><span class="stat-label">Tech Tracks</span></div>
+        <div class="stat"><span class="stat-num" data-target="6">0</span><span class="stat-plus">+</span><span
+            class="stat-label">Tech Tracks</span></div>
         <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num" data-target="1">0</span><span class="stat-plus">yr</span><span class="stat-label">Program Duration</span></div>
+        <div class="stat"><span class="stat-num" data-target="1">0</span><span class="stat-plus">yr</span><span
+            class="stat-label">Program Duration</span></div>
         <div class="stat-sep"></div>
-        <div class="stat"><span class="stat-num" data-target="100">0</span><span class="stat-plus">%</span><span class="stat-label">Hands-On Training</span></div>
+        <div class="stat"><span class="stat-num" data-target="100">0</span><span class="stat-plus">%</span><span
+            class="stat-label">Hands-On Training</span></div>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -88,12 +99,26 @@
       <div class="about-grid">
         <div class="about-left">
           <h2 class="section-title">We Bridge the Gap Between <span class="text-accent">Campus & Career</span></h2>
-          <p class="about-body">RL Codexa is an IT training startup that partners directly with engineering and arts & science colleges to run structured, industry-aligned technology programs within the campus ecosystem.</p>
-          <p class="about-body">Our model is simple: we come to your college, train your students with real-world projects, and hand them certified skills that employers actually look for.</p>
+          <p class="about-body">RL Codexa is an IT training startup that partners directly with engineering and arts &
+            science colleges to run structured, industry-aligned technology programs within the campus ecosystem.</p>
+          <p class="about-body">Our model is simple: we come to your college, train your students with real-world
+            projects, and hand them certified skills that employers actually look for.</p>
           <div class="about-highlights">
-            <div class="highlight"><div class="h-icon">⚡</div><div><strong>On-Campus Training</strong><br><small>Sessions held at your college — no commute needed</small></div></div>
-            <div class="highlight"><div class="h-icon">🎯</div><div><strong>Industry-Aligned Curriculum</strong><br><small>Updated quarterly with current tech stack demands</small></div></div>
-            <div class="highlight"><div class="h-icon">🏆</div><div><strong>Certified Completion</strong><br><small>RL Codexa certificate recognized by hiring partners</small></div></div>
+            <div class="highlight">
+              <div class="h-icon">⚡</div>
+              <div><strong>On-Campus Training</strong><br><small>Sessions held at your college — no commute
+                  needed</small></div>
+            </div>
+            <div class="highlight">
+              <div class="h-icon">🎯</div>
+              <div><strong>Industry-Aligned Curriculum</strong><br><small>Updated quarterly with current tech stack
+                  demands</small></div>
+            </div>
+            <div class="highlight">
+              <div class="h-icon">🏆</div>
+              <div><strong>Certified Completion</strong><br><small>RL Codexa certificate recognized by hiring
+                  partners</small></div>
+            </div>
           </div>
         </div>
         <div class="about-right">
@@ -125,15 +150,50 @@
     <div class="container">
       <div class="section-tag">// our courses</div>
       <h2 class="section-title centered">6 In-Demand <span class="text-accent">Technology Tracks</span></h2>
-      <p class="section-sub centered">Choose one specialization. Master it over 12 months with expert trainers.</p>
+      <p class="section-sub centered">Same courses, different pace — pick your track based on where you are right now.
+      </p>
 
-      <div class="courses-grid">
+      <!-- ── TAB SWITCHER ── -->
+      <div class="course-tabs">
+        <button class="course-tab active" data-tab="college">
+          <span class="tab-icon">🎓</span>
+          <span class="tab-main">College Students</span>
+          <span class="tab-sub">Final Year &amp; Pre-Final Year</span>
+        </button>
+        <div class="tab-divider"></div>
+        <button class="course-tab" data-tab="alumni">
+          <span class="tab-icon">👨‍💼</span>
+          <span class="tab-main">Alumni / Graduates</span>
+          <span class="tab-sub">Former students of tie-up colleges</span>
+        </button>
+      </div>
+
+      <!-- ── INFO BANNER (changes per tab) ── -->
+      <div class="course-info-banner" id="courseInfoBanner">
+        <div class="cib-inner" id="cibCollege">
+          <span class="cib-badge cib-badge--blue">🏫 On-Campus Program</span>
+          <span class="cib-text">Conducted at your college · <strong>2 Semesters</strong> · Final Year &amp; Pre-Final
+            Year students · Semester-aligned schedule</span>
+        </div>
+        <div class="cib-inner cib-hidden" id="cibAlumni">
+          <span class="cib-badge cib-badge--green">🎯 Fast-Track Program</span>
+          <span class="cib-text">For college graduates / alumni · <strong>1 Quarter (3 months)</strong> · Intensive
+            weekend &amp; weekday batches · Internship certificate on completion</span>
+        </div>
+      </div>
+
+      <!-- ── COLLEGE TAB CARDS ── -->
+      <div class="courses-grid" id="tabCollege">
 
         <div class="course-card" data-color="#FFD43B">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#FFD43B">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" onerror="this.style.display='none'"/>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+              </svg>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"
+                onerror="this.style.display='none'" />
             </div>
             <div class="cc-badge">Popular</div>
           </div>
@@ -146,15 +206,15 @@
             <li>Automation & Scripting</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Beginner → Advanced</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
           </div>
         </div>
 
         <div class="course-card" data-color="#61DAFB">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#61DAFB">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="Full Stack"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="Full Stack" />
             </div>
           </div>
           <h3 class="cc-title">Full Stack Dev</h3>
@@ -166,15 +226,15 @@
             <li>MongoDB & Deployment</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Beginner → Advanced</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
           </div>
         </div>
 
         <div class="course-card" data-color="#F89820">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#F89820">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
             </div>
           </div>
           <h3 class="cc-title">Java</h3>
@@ -186,15 +246,16 @@
             <li>Hibernate & JPA</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Beginner → Advanced</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
           </div>
         </div>
 
         <div class="course-card" data-color="#06D6A0">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#06D6A0">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="AI"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                alt="AI" />
             </div>
             <div class="cc-badge cc-badge--hot">Hot</div>
           </div>
@@ -207,15 +268,17 @@
             <li>Model Deployment & APIs</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Intermediate → Expert</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
           </div>
         </div>
 
         <div class="course-card" data-color="#FF9900">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#FF9900">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS"/>
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                alt="AWS" />
             </div>
           </div>
           <h3 class="cc-title">AWS Cloud</h3>
@@ -227,15 +290,15 @@
             <li>CloudFormation & DevOps</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Beginner → Associate</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
           </div>
         </div>
 
         <div class="course-card" data-color="#FF6B35">
           <div class="cc-top">
             <div class="cc-icon" style="--c:#FF6B35">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="DevOps"/>
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="DevOps" />
             </div>
           </div>
           <h3 class="cc-title">DevOps</h3>
@@ -247,8 +310,143 @@
             <li>Terraform & Monitoring</li>
           </ul>
           <div class="cc-footer">
-            <span class="cc-duration">12 months</span>
-            <span class="cc-level">Intermediate → Advanced</span>
+            <span class="cc-duration">2 Semesters</span>
+            <span class="cc-level">Final Year Students</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── ALUMNI TAB CARDS ── -->
+      <div class="courses-grid cg-hidden" id="tabAlumni">
+
+        <div class="course-card" data-color="#FFD43B">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#FFD43B">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+            </div>
+            <div class="cc-badge">Popular</div>
+          </div>
+          <h3 class="cc-title">Python</h3>
+          <p class="cc-desc">Intensive Python track — OOP, real-world projects, API development & deployment-ready
+            skills</p>
+          <ul class="cc-topics">
+            <li>Python Fundamentals (fast-track)</li>
+            <li>Real-World Projects & APIs</li>
+            <li>Data Handling & Automation</li>
+            <li>Portfolio-ready Capstone</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
+          </div>
+        </div>
+
+        <div class="course-card" data-color="#61DAFB">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#61DAFB">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="Full Stack" />
+            </div>
+          </div>
+          <h3 class="cc-title">Full Stack Dev</h3>
+          <p class="cc-desc">Condensed full-stack bootcamp — build and deploy a complete web app from scratch in 3
+            months</p>
+          <ul class="cc-topics">
+            <li>HTML/CSS/JS Fast-Track</li>
+            <li>React + Node.js App Build</li>
+            <li>REST API & Database Design</li>
+            <li>Live Deployment & Portfolio</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
+          </div>
+        </div>
+
+        <div class="course-card" data-color="#F89820">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#F89820">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+            </div>
+          </div>
+          <h3 class="cc-title">Java</h3>
+          <p class="cc-desc">Focused Java bootcamp — Spring Boot, REST APIs and backend development for job readiness
+          </p>
+          <ul class="cc-topics">
+            <li>Core Java Rapid Revision</li>
+            <li>Spring Boot & REST APIs</li>
+            <li>Hibernate & MySQL</li>
+            <li>Mini Industry Project</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
+          </div>
+        </div>
+
+        <div class="course-card" data-color="#06D6A0">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#06D6A0">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                alt="AI" />
+            </div>
+            <div class="cc-badge cc-badge--hot">Hot</div>
+          </div>
+          <h3 class="cc-title">AI / ML</h3>
+          <p class="cc-desc">Accelerated ML track — build, train and deploy real models for your resume and interviews
+          </p>
+          <ul class="cc-topics">
+            <li>ML Essentials & Key Algorithms</li>
+            <li>Model Training & Evaluation</li>
+            <li>NLP or CV Mini-Project</li>
+            <li>Model Deployment (Flask/FastAPI)</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
+          </div>
+        </div>
+
+        <div class="course-card" data-color="#FF9900">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#FF9900">
+              <img
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                alt="AWS" />
+            </div>
+          </div>
+          <h3 class="cc-title">AWS Cloud</h3>
+          <p class="cc-desc">3-month cloud crash course — hands-on labs, real AWS account usage & certification prep</p>
+          <ul class="cc-topics">
+            <li>Cloud Core & IAM Hands-On</li>
+            <li>EC2, S3, Lambda Labs</li>
+            <li>VPC Setup & Monitoring</li>
+            <li>AWS Certification Prep</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
+          </div>
+        </div>
+
+        <div class="course-card" data-color="#FF6B35">
+          <div class="cc-top">
+            <div class="cc-icon" style="--c:#FF6B35">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="DevOps" />
+            </div>
+          </div>
+          <h3 class="cc-title">DevOps</h3>
+          <p class="cc-desc">Intensive DevOps sprint — CI/CD pipelines, Docker & Kubernetes in real project environments
+          </p>
+          <ul class="cc-topics">
+            <li>Git, Docker & Containers</li>
+            <li>Kubernetes Basics & Helm</li>
+            <li>Jenkins CI/CD Pipeline Build</li>
+            <li>Real Infrastructure Project</li>
+          </ul>
+          <div class="cc-footer">
+            <span class="cc-duration cc-duration--quarter">1 Quarter</span>
+            <span class="cc-level cc-level--alumni">Alumni / Graduates</span>
           </div>
         </div>
 
@@ -271,7 +469,8 @@
           <div class="tl-card">
             <div class="tl-num">01</div>
             <h3 class="tl-title">MOU Signing</h3>
-            <p class="tl-desc">We sign a formal Memorandum of Understanding with your institution. This covers scope, schedule, fee structure and responsibilities for both parties.</p>
+            <p class="tl-desc">We sign a formal Memorandum of Understanding with your institution. This covers scope,
+              schedule, fee structure and responsibilities for both parties.</p>
             <div class="tl-tags"><span>Legal Agreement</span><span>Academic Year</span></div>
           </div>
         </div>
@@ -281,7 +480,8 @@
           <div class="tl-card">
             <div class="tl-num">02</div>
             <h3 class="tl-title">Curriculum Setup</h3>
-            <p class="tl-desc">Our team works with college coordinators to align the course syllabus with your university structure, semester schedule and elective framework.</p>
+            <p class="tl-desc">Our team works with college coordinators to align the course syllabus with your
+              university structure, semester schedule and elective framework.</p>
             <div class="tl-tags"><span>Custom Syllabus</span><span>University Aligned</span></div>
           </div>
         </div>
@@ -291,7 +491,8 @@
           <div class="tl-card">
             <div class="tl-num">03</div>
             <h3 class="tl-title">Student Enrollment</h3>
-            <p class="tl-desc">Students register for their chosen technology track. Batches of 25–40 students are formed per track, ensuring quality trainer-to-student ratio.</p>
+            <p class="tl-desc">Students register for their chosen technology track. Batches of 25–40 students are formed
+              per track, ensuring quality trainer-to-student ratio.</p>
             <div class="tl-tags"><span>Batch of 25–40</span><span>Track Selection</span></div>
           </div>
         </div>
@@ -301,7 +502,8 @@
           <div class="tl-card">
             <div class="tl-num">04</div>
             <h3 class="tl-title">Training Delivery</h3>
-            <p class="tl-desc">Expert trainers conduct on-campus sessions 3–4 days per week, blending theory, live coding, mini-projects and weekly assessments over 12 months.</p>
+            <p class="tl-desc">Expert trainers conduct on-campus sessions 3–4 days per week, blending theory, live
+              coding, mini-projects and weekly assessments over 12 months.</p>
             <div class="tl-tags"><span>On-Campus</span><span>Hybrid Option</span><span>Live Projects</span></div>
           </div>
         </div>
@@ -311,7 +513,8 @@
           <div class="tl-card">
             <div class="tl-num">05</div>
             <h3 class="tl-title">Certification & Placement</h3>
-            <p class="tl-desc">Successful students receive the RL Codexa industry certificate. We assist with placement drives, resume building and mock interview sessions.</p>
+            <p class="tl-desc">Successful students receive the RL Codexa industry certificate. We assist with placement
+              drives, resume building and mock interview sessions.</p>
             <div class="tl-tags"><span>RL Codexa Certificate</span><span>Placement Support</span></div>
           </div>
         </div>
@@ -331,32 +534,38 @@
         <div class="why-card" data-i="0">
           <div class="why-icon" style="--c:#00B4D8">👨‍💻</div>
           <h3>Industry Expert Trainers</h3>
-          <p>Every trainer has 5+ years of hands-on experience at top product companies and MNCs — not just academic backgrounds.</p>
+          <p>Every trainer has 5+ years of hands-on experience at top product companies and MNCs — not just academic
+            backgrounds.</p>
         </div>
         <div class="why-card" data-i="1">
           <div class="why-icon" style="--c:#06D6A0">🔄</div>
           <h3>Quarterly Curriculum Updates</h3>
-          <p>We review and update course content every quarter to match what companies are actually hiring for — never outdated material.</p>
+          <p>We review and update course content every quarter to match what companies are actually hiring for — never
+            outdated material.</p>
         </div>
         <div class="why-card" data-i="2">
           <div class="why-icon" style="--c:#FF9900">🏫</div>
           <h3>College-Friendly Scheduling</h3>
-          <p>Sessions are scheduled around your college timetable, internal exams, and semester breaks — zero disruption to academic routines.</p>
+          <p>Sessions are scheduled around your college timetable, internal exams, and semester breaks — zero disruption
+            to academic routines.</p>
         </div>
         <div class="why-card" data-i="3">
           <div class="why-icon" style="--c:#9B5DE5">📋</div>
           <h3>Project-Based Learning</h3>
-          <p>Each track includes 3+ real-world projects and a final capstone that students can add to their portfolio and GitHub profile.</p>
+          <p>Each track includes 3+ real-world projects and a final capstone that students can add to their portfolio
+            and GitHub profile.</p>
         </div>
         <div class="why-card" data-i="4">
           <div class="why-icon" style="--c:#F72585">🎓</div>
           <h3>Recognized Certification</h3>
-          <p>RL Codexa certificates are valued by our hiring partners. Students get a credential that stands out on their resume from day one.</p>
+          <p>RL Codexa certificates are valued by our hiring partners. Students get a credential that stands out on
+            their resume from day one.</p>
         </div>
         <div class="why-card" data-i="5">
           <div class="why-icon" style="--c:#FFD43B">🚀</div>
           <h3>Placement Assistance</h3>
-          <p>Mock interviews, resume workshops, and direct connections to our network of hiring companies for every completing student.</p>
+          <p>Mock interviews, resume workshops, and direct connections to our network of hiring companies for every
+            completing student.</p>
         </div>
       </div>
     </div>
@@ -382,21 +591,21 @@
             <div class="ci-icon">📞</div>
             <div>
               <div class="ci-label">Call Us</div>
-              <div class="ci-val">91-6382605525</div>
+              <div class="ci-val">+91-6382605525</div>
             </div>
           </div>
           <div class="ci-item">
             <div class="ci-icon">🌐</div>
             <div>
               <div class="ci-label">Website</div>
-              <div class="ci-val">https://rlcodex.netlify.app/</div>
+              <div class="ci-val"><a href="https://rlcodexa.netlify.app/" target="_blank">rlcodexa</a></div>
             </div>
           </div>
           <div class="ci-item">
             <div class="ci-icon">📍</div>
             <div>
               <div class="ci-label">Based In</div>
-              <div class="ci-val">Tamil Nadu, India</div>
+              <div class="ci-val">Coimbatore, Tamil Nadu-641035</div>
             </div>
           </div>
           <div class="contact-social">
@@ -410,21 +619,21 @@
           <div class="form-row">
             <div class="form-group">
               <label>Your Name</label>
-              <input type="text" placeholder="Dr. / Prof. Name" required/>
+              <input type="text" placeholder="Dr. / Prof. Name" required />
             </div>
             <div class="form-group">
               <label>College Name</label>
-              <input type="text" placeholder="Your Institution" required/>
+              <input type="text" placeholder="Your Institution" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" placeholder="you@college.edu" required/>
+              <input type="email" placeholder="you@college.edu" required />
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="+91 XXXXX XXXXX"/>
+              <input type="tel" placeholder="+91 XXXXX XXXXX" />
             </div>
           </div>
           <div class="form-group">
@@ -440,7 +649,8 @@
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea rows="4" placeholder="Tell us about your college, expected batch size, preferred schedule..."></textarea>
+            <textarea rows="4"
+              placeholder="Tell us about your college, expected batch size, preferred schedule..."></textarea>
           </div>
           <button type="submit" class="btn-primary btn-full">
             Send Enquiry <span class="btn-arrow">→</span>
@@ -459,9 +669,12 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <div class="nav-logo">
-            <span class="logo-bracket">[</span>RL<span class="logo-accent">CODEXA</span><span class="logo-bracket">]</span>
+            <span class="logo-bracket">
+              <img src="./foot_logo.png" alt="Logo" class="footer-logo" style="width: 250px;height: auto;" />
+            </span>
           </div>
-          <p>Empowering college students with industry-ready technology skills through structured, campus-based training.</p>
+          <p>Empowering college students with industry-ready technology skills through structured, campus-based
+            training.</p>
         </div>
         <div class="footer-links">
           <div class="fl-col">
@@ -488,11 +701,12 @@
       </div>
     </div>
   </footer>
-
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="script.js"></script>
   <script>
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>

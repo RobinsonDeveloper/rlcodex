@@ -201,25 +201,103 @@ document.querySelectorAll('.why-card').forEach((card, i) => {
   card.querySelector('.why-icon').style.borderColor = `${colors[i % colors.length]}28`;
 });
 
-// ── CONTACT FORM ──
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+// ── COURSE TAB SWITCHER ──
+document.querySelectorAll('.course-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+
+    // Update tab buttons
+    document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Toggle grids
+    const collegeGrid = document.getElementById('tabCollege');
+    const alumniGrid  = document.getElementById('tabAlumni');
+    const cibCollege  = document.getElementById('cibCollege');
+    const cibAlumni   = document.getElementById('cibAlumni');
+
+    if (target === 'college') {
+      collegeGrid.classList.remove('cg-hidden');
+      alumniGrid.classList.add('cg-hidden');
+      cibCollege.classList.remove('cib-hidden');
+      cibAlumni.classList.add('cib-hidden');
+    } else {
+      alumniGrid.classList.remove('cg-hidden');
+      collegeGrid.classList.add('cg-hidden');
+      cibAlumni.classList.remove('cib-hidden');
+      cibCollege.classList.add('cib-hidden');
+    }
+
+    // Re-trigger reveal animations on newly shown cards
+    document.querySelectorAll('#tab' + target.charAt(0).toUpperCase() + target.slice(1) + ' .course-card').forEach((el, i) => {
+      el.classList.remove('visible');
+      el.style.transitionDelay = `${i * 60}ms`;
+      setTimeout(() => el.classList.add('visible'), 30);
+    });
+  });
+});
+
+
+// ─────────────────────────────────────────────────────────────────
+const EMAILJS_PUBLIC_KEY  = 'F-PcGmaeaEuH4PeoB';       // ← paste here
+const EMAILJS_SERVICE_ID  = 'service_uzw70ge';       // ← paste here
+const EMAILJS_TEMPLATE_ID = 'template_wldbz1n';      // ← paste here
+// ─────────────────────────────────────────────────────────────────
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const btn = this.querySelector('.btn-primary');
-  btn.textContent = 'Sending...';
-  btn.style.opacity = '0.7';
-  setTimeout(() => {
-    btn.textContent = 'Message Sent! ✓';
+  const form = this;
+  const btn  = form.querySelector('.btn-primary');
+  const successBox = document.getElementById('formSuccess');
+  const errorBox   = document.getElementById('formError');
+
+  // Collect checked courses
+  const courses = [...form.querySelectorAll('input[type=checkbox]:checked')]
+    .map(el => el.value).join(', ') || 'None selected';
+
+  // Button → loading state
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-spinner"></span> Sending...';
+  btn.style.opacity = '0.75';
+  if (errorBox) errorBox.style.display = 'none';
+
+  const templateParams = {
+    from_name:    form.querySelector('input[type=text]').value,
+    college_name: form.querySelectorAll('input[type=text]')[1].value,
+    from_email:   form.querySelector('input[type=email]').value,
+    phone:        form.querySelector('input[type=tel]').value || 'Not provided',
+    courses:      courses,
+    message:      form.querySelector('textarea').value || 'No message',
+    to_email:     'rahulpoovarasan15@gmail.com',
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+
+    // ✅ Success
+    btn.innerHTML = '✓ Enquiry Sent!';
     btn.style.background = 'var(--green)';
     btn.style.opacity = '1';
-    document.getElementById('formSuccess').style.display = 'block';
-    this.querySelectorAll('input, textarea').forEach(el => el.value = '');
-    this.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+    successBox.style.display = 'block';
+
+    form.querySelectorAll('input, textarea').forEach(el => el.value = '');
+    form.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
+
     setTimeout(() => {
-      btn.textContent = 'Send Enquiry →';
+      btn.innerHTML = 'Send Enquiry <span class="btn-arrow">→</span>';
       btn.style.background = '';
-      document.getElementById('formSuccess').style.display = 'none';
-    }, 4000);
-  }, 1200);
+      btn.disabled = false;
+      successBox.style.display = 'none';
+    }, 5000);
+
+  } catch (err) {
+    // ❌ Error
+    btn.innerHTML = 'Send Enquiry <span class="btn-arrow">→</span>';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    if (errorBox) errorBox.style.display = 'block';
+    console.error('EmailJS error:', err);
+  }
 });
 
 // ── SMOOTH ANCHOR SCROLL ──
