@@ -175,7 +175,7 @@ body {
   height: 72px;
 }
 
-.nav-logo {
+/* .nav-logo {
   font-family: var(--font-disp);
   font-size: 1.15rem;
   font-weight: 700;
@@ -183,7 +183,7 @@ body {
   text-decoration: none;
   white-space: nowrap;
   letter-spacing: 0.05em;
-}
+} */
 
 .nav-logo img {
   width: 90px;
