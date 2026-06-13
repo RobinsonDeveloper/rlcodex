@@ -20,7 +20,7 @@ function animateCursor() {
 }
 animateCursor();
 
-document.querySelectorAll('a, button, .course-card, .why-card, .highlight, .chk').forEach(el => {
+document.querySelectorAll('a, button, .course-card, .why-card, .highlight, .chk, .internship-card, .apply-btn').forEach(el => {
   el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
   el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
 });
@@ -48,7 +48,7 @@ document.querySelectorAll('.mob-link').forEach(link => {
 // ── ACTIVE NAV LINK ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
-const observer = new IntersectionObserver(entries => {
+const navObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       navLinks.forEach(l => l.classList.remove('active'));
@@ -57,7 +57,7 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { rootMargin: '-40% 0px -40% 0px' });
-sections.forEach(s => observer.observe(s));
+sections.forEach(s => navObserver.observe(s));
 
 // ── HERO CANVAS PARTICLE NETWORK ──
 const canvas = document.getElementById('heroCanvas');
@@ -96,8 +96,6 @@ canvas.addEventListener('mousemove', e => {
 
 function drawParticles() {
   ctx.clearRect(0, 0, W, H);
-
-  // Lines between close particles
   for (let i = 0; i < particles.length; i++) {
     for (let j = i + 1; j < particles.length; j++) {
       const dx = particles[i].x - particles[j].x;
@@ -112,7 +110,6 @@ function drawParticles() {
         ctx.stroke();
       }
     }
-    // Mouse connection
     const dx = particles[i].x - mouseX;
     const dy = particles[i].y - mouseY;
     const dist = Math.sqrt(dx * dx + dy * dy);
@@ -125,25 +122,21 @@ function drawParticles() {
       ctx.stroke();
     }
   }
-
-  // Dots
   particles.forEach(p => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(0,180,216,${p.alpha})`;
     ctx.fill();
-
     p.x += p.vx; p.y += p.vy;
     if (p.x < 0 || p.x > W) p.vx *= -1;
     if (p.y < 0 || p.y > H) p.vy *= -1;
   });
-
   requestAnimationFrame(drawParticles);
 }
 drawParticles();
 
 // ── COUNTER ANIMATION ──
-function animateCounter(el, target, suffix) {
+function animateCounter(el, target) {
   const duration = 1800;
   const start = performance.now();
   function update(now) {
@@ -160,7 +153,7 @@ const statsObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       document.querySelectorAll('.stat-num').forEach(el => {
-        animateCounter(el, parseInt(el.dataset.target), '');
+        animateCounter(el, parseInt(el.dataset.target));
       });
       statsObserver.disconnect();
     }
@@ -171,7 +164,7 @@ if (heroStats) statsObserver.observe(heroStats);
 
 // ── SCROLL REVEAL ──
 const revealEls = document.querySelectorAll(
-  '.course-card, .why-card, .tl-step, .about-left, .about-right, .contact-info, .contact-form, .ci-item, .highlight, .av-card'
+  '.course-card, .why-card, .tl-step, .about-left, .about-right, .contact-info, .contact-form, .ci-item, .highlight, .av-card, .internship-card, .certificate-showcase'
 );
 revealEls.forEach((el, i) => {
   el.classList.add('reveal');
@@ -205,17 +198,12 @@ document.querySelectorAll('.why-card').forEach((card, i) => {
 document.querySelectorAll('.course-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const target = tab.dataset.tab;
-
-    // Update tab buttons
     document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-
-    // Toggle grids
     const collegeGrid = document.getElementById('tabCollege');
     const alumniGrid  = document.getElementById('tabAlumni');
     const cibCollege  = document.getElementById('cibCollege');
     const cibAlumni   = document.getElementById('cibAlumni');
-
     if (target === 'college') {
       collegeGrid.classList.remove('cg-hidden');
       alumniGrid.classList.add('cg-hidden');
@@ -227,8 +215,6 @@ document.querySelectorAll('.course-tab').forEach(tab => {
       cibAlumni.classList.remove('cib-hidden');
       cibCollege.classList.add('cib-hidden');
     }
-
-    // Re-trigger reveal animations on newly shown cards
     document.querySelectorAll('#tab' + target.charAt(0).toUpperCase() + target.slice(1) + ' .course-card').forEach((el, i) => {
       el.classList.remove('visible');
       el.style.transitionDelay = `${i * 60}ms`;
@@ -237,25 +223,120 @@ document.querySelectorAll('.course-tab').forEach(tab => {
   });
 });
 
-
 // ─────────────────────────────────────────────────────────────────
-const EMAILJS_PUBLIC_KEY  = 'F-PcGmaeaEuH4PeoB';       // ← paste here
-const EMAILJS_SERVICE_ID  = 'service_uzw70ge';       // ← paste here
-const EMAILJS_TEMPLATE_ID = 'template_wldbz1n';      // ← paste here
+// ── EMAILJS CONFIG ──
+const EMAILJS_PUBLIC_KEY       = 'Cfv_2Ej4erJhTeEmN';
+const EMAILJS_SERVICE_ID       = 'service_9bz80v2';
+const EMAILJS_TEMPLATE_ENQUIRY = 'template_pdmgrg8';   // 👈 College Enquiry
+const EMAILJS_TEMPLATE_INTERN  = 'template_k712a7b';   // 👈 Internship Application
+const OWNER_EMAIL              = 'rlcodexa@gmail.com';
 // ─────────────────────────────────────────────────────────────────
 
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
+// Initialize EmailJS
+try {
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+} catch (err) {
+  console.error('EmailJS init failed:', err);
+}
+
+// ── Reusable EmailJS sender with proper error mapping ──
+async function sendEmail(templateId, templateParams) {
+  try {
+    return await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      templateId,
+      templateParams,
+      { publicKey: EMAILJS_PUBLIC_KEY }
+    );
+  } catch (err) {
+    const msg = (err && (err.text || err.message)) || 'Unknown error';
+    console.error('EmailJS send error:', err);
+    throw new Error(msg);
+  }
+}
+
+function isGmailAuthError(err) {
+  const text = (err?.text || err?.message || '').toString().toLowerCase();
+  return (
+    text.includes('invalid_grant') ||
+    text.includes('invalid grant') ||
+    text.includes('gmail_api') ||
+    text.includes('reconnect your gmail')
+  );
+}
+
+function handleEmailError(err, btn, errorBox, btnText) {
+  btn.disabled = false;
+  btn.style.opacity = '1';
+  btn.innerHTML = `${btnText} <span class="btn-arrow">→</span>`;
+
+  const message = isGmailAuthError(err)
+    ? '⚠️ Email service is temporarily disconnected. Please email us directly at <strong>rlcodexa@gmail.com</strong> or call <strong>+91-6382605525</strong>.'
+    : '❌ Something went wrong. Please try again or contact us directly at <strong>rlcodexa@gmail.com</strong>.';
+
+  if (errorBox) {
+    errorBox.innerHTML = message;
+    errorBox.style.display = 'block';
+  } else {
+    alert(message.replace(/<[^>]+>/g, ''));
+  }
+}
+
+// ── FORM MODE SWITCHER (Enquiry ↔ Internship) ──
+const contactForm    = document.getElementById('contactForm');
+const internshipForm = document.getElementById('internshipForm');
+const contactHeading = document.getElementById('contactHeading');
+const contactSub     = document.getElementById('contactSubtext');
+const modeButtons    = document.querySelectorAll('.form-mode-btn');
+
+function switchFormMode(mode, preselectTrack = null) {
+  modeButtons.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+
+  if (mode === 'internship') {
+    contactForm.classList.add('form-hidden');
+    internshipForm.classList.remove('form-hidden');
+    contactHeading.innerHTML = 'Apply for <span class="text-accent">Internship</span>';
+    contactSub.textContent   = 'Submit your application — our team will get back within 48 hours.';
+
+    if (preselectTrack) {
+      const trackSelect = document.getElementById('internTrack');
+      if (trackSelect) {
+        for (let opt of trackSelect.options) {
+          if (opt.value === preselectTrack) {
+            trackSelect.value = preselectTrack;
+            break;
+          }
+        }
+      }
+    }
+  } else {
+    internshipForm.classList.add('form-hidden');
+    contactForm.classList.remove('form-hidden');
+    contactHeading.innerHTML = 'Let\'s Partner <span class="text-accent">Your College</span>';
+    contactSub.textContent   = 'Reach out to discuss a tie-up for the upcoming academic year.';
+  }
+
+  // Re-trigger reveal animation
+  const activeForm = mode === 'internship' ? internshipForm : contactForm;
+  activeForm.classList.remove('visible');
+  setTimeout(() => activeForm.classList.add('visible'), 30);
+}
+
+modeButtons.forEach(btn => {
+  btn.addEventListener('click', () => switchFormMode(btn.dataset.mode));
+});
+
+// ── ENQUIRY FORM SUBMIT ──
+contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
   const form = this;
   const btn  = form.querySelector('.btn-primary');
   const successBox = document.getElementById('formSuccess');
   const errorBox   = document.getElementById('formError');
 
-  // Collect checked courses
   const courses = [...form.querySelectorAll('input[type=checkbox]:checked')]
     .map(el => el.value).join(', ') || 'None selected';
 
-  // Button → loading state
   btn.disabled = true;
   btn.innerHTML = '<span class="btn-spinner"></span> Sending...';
   btn.style.opacity = '0.75';
@@ -268,18 +349,19 @@ document.getElementById('contactForm').addEventListener('submit', async function
     phone:        form.querySelector('input[type=tel]').value || 'Not provided',
     courses:      courses,
     message:      form.querySelector('textarea').value || 'No message',
-    to_email:     'rahulpoovarasan15@gmail.com',
+    time:         new Date().toLocaleString('en-IN', {
+                     dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata'
+                   }),
+    to_email:     OWNER_EMAIL,
   };
 
   try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+    await sendEmail(EMAILJS_TEMPLATE_ENQUIRY, templateParams);
 
-    // ✅ Success
     btn.innerHTML = '✓ Enquiry Sent!';
     btn.style.background = 'var(--green)';
     btn.style.opacity = '1';
     successBox.style.display = 'block';
-
     form.querySelectorAll('input, textarea').forEach(el => el.value = '');
     form.querySelectorAll('input[type=checkbox]').forEach(el => el.checked = false);
 
@@ -291,12 +373,60 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }, 5000);
 
   } catch (err) {
-    // ❌ Error
-    btn.innerHTML = 'Send Enquiry <span class="btn-arrow">→</span>';
+    handleEmailError(err, btn, errorBox, 'Send Enquiry');
+  }
+});
+
+// ── INTERNSHIP FORM SUBMIT ──
+internshipForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn  = form.querySelector('.btn-primary');
+  const successBox = document.getElementById('internSuccess');
+  const errorBox   = document.getElementById('internError');
+
+  const get = name => form.querySelector(`[name="${name}"]`);
+  const checkedRadio = form.querySelector('[name="intern_duration"]:checked');
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btn-spinner"></span> Submitting...';
+  btn.style.opacity = '0.75';
+  if (errorBox) errorBox.style.display = 'none';
+
+  const templateParams = {
+    from_name:        get('intern_name').value,
+    college_name:     get('intern_college').value,
+    from_email:       get('intern_email').value,
+    phone:            get('intern_phone').value,
+    current_year:     get('intern_year').value,
+    internship_track: get('intern_track').value,
+    duration:         checkedRadio ? checkedRadio.value : 'Not selected',
+    skills:           get('intern_skills').value   || 'Not provided',
+    resume_link:      get('intern_resume').value   || 'Not provided',
+    linkedin:         get('intern_linkedin').value || 'Not provided',
+    message:          get('intern_message').value,
+    time:             new Date().toLocaleString('en-IN', {
+                         dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata'
+                       }),
+    to_email:         OWNER_EMAIL,
+  };
+
+  try {
+    await sendEmail(EMAILJS_TEMPLATE_INTERN, templateParams);
+
+    btn.innerHTML = '✓ Application Submitted!';
     btn.style.opacity = '1';
-    btn.disabled = false;
-    if (errorBox) errorBox.style.display = 'block';
-    console.error('EmailJS error:', err);
+    successBox.style.display = 'block';
+    form.reset();
+
+    setTimeout(() => {
+      btn.innerHTML = 'Submit Application <span class="btn-arrow">→</span>';
+      btn.disabled = false;
+      successBox.style.display = 'none';
+    }, 6000);
+
+  } catch (err) {
+    handleEmailError(err, btn, errorBox, 'Submit Application');
   }
 });
 
@@ -304,9 +434,56 @@ document.getElementById('contactForm').addEventListener('submit', async function
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
+    if (target && !a.classList.contains('apply-btn') && a.id !== 'internshipCtaBtn') {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── INTERNSHIP APPLY BUTTONS - SWITCH FORM & PRE-SELECT TRACK ──
+const internshipTrackMap = {
+  'Software Dev Internship':  'Software Dev (Python/Full Stack/Java)',
+  'AI/ML Internship':         'AI / ML',
+  'Cloud & DevOps Internship':'Cloud & DevOps (AWS)',
+};
+
+// 1) Internship card "Apply" buttons
+document.querySelectorAll('.internship-card').forEach(card => {
+  const titleEl = card.querySelector('h3');
+  if (!titleEl) return;
+  const trackKey = titleEl.textContent.trim();
+  const cardBtn = document.createElement('a');
+  cardBtn.href = '#contact';
+  cardBtn.className = 'apply-btn';
+  cardBtn.innerHTML = 'Apply Now →';
+  card.appendChild(cardBtn);
+
+  cardBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const preselect = internshipTrackMap[trackKey] || null;
+    switchFormMode('internship', preselect);
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// 2) Main "Apply for Internship" CTA button
+const ctaBtn = document.getElementById('internshipCtaBtn');
+if (ctaBtn) {
+  ctaBtn.addEventListener('click', e => {
+    e.preventDefault();
+    switchFormMode('internship', null);
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// 3) "Partner With Us" nav button → switch to enquiry form
+document.querySelectorAll('a[href="#contact"]').forEach(link => {
+  if (link.classList.contains('apply-btn') || link.id === 'internshipCtaBtn') return;
+  link.addEventListener('click', () => {
+    const activeMode = document.querySelector('.form-mode-btn.active');
+    if (activeMode && activeMode.dataset.mode !== 'enquiry') {
+      switchFormMode('enquiry');
     }
   });
 });

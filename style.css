@@ -160,7 +160,7 @@ body {
 }
 
 #navbar.scrolled {
-  background: rgba(8, 14, 26, 0.92);
+  /* background: rgba(8, 14, 26, 0.92); */
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -186,9 +186,9 @@ body {
 } */
 
 .nav-logo img {
-  width: 90px;
-  height: 80px;
-  mix-blend-mode:lighten !important;
+  width: 140px;
+  height: 100px;
+  mix-blend-mode: lighten !important;
 }
 
 .logo-bracket {
@@ -1214,7 +1214,7 @@ body {
   letter-spacing: 0.08em;
 }
 
-.ci-val a{
+.ci-val a {
   font-size: 0.95rem;
   color: var(--white);
   font-weight: 600;
@@ -1298,31 +1298,59 @@ body {
 .checkbox-group {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
 }
 
 .chk {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  justify-content: center;
+  gap: 1.2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--muted);
-  background: var(--bg2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.5rem 0.8rem;
-  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(13, 22, 40, 0.6), rgba(15, 28, 48, 0.6));
+  border: 1.5px solid rgba(0, 180, 216, 0.15);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
   cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
+  transition: all 0.3s var(--ease);
+  backdrop-filter: blur(2px);
+  position: relative;
+
 }
 
 .chk:hover {
-  border-color: rgba(0, 180, 216, 0.3);
+  border-color: rgba(0, 180, 216, 0.4);
   color: var(--white);
+  background: linear-gradient(135deg, rgba(13, 22, 40, 0.8), rgba(15, 28, 48, 0.9));
+  transform: translateY(-2px);
 }
 
 .chk input[type="checkbox"] {
   accent-color: var(--accent);
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin: 0px 10px;
+}
+
+.chk input[type="checkbox"]:checked+span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.chk input[type="checkbox"]:checked {
+  accent-color: var(--accent);
+}
+
+.chk:has(input[type="checkbox"]:checked) {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.08), rgba(0, 120, 182, 0.08));
+  color: var(--white);
+  box-shadow: 0 0 16px rgba(0, 180, 216, 0.15);
 }
 
 .form-success {
@@ -1559,4 +1587,171 @@ body {
   .checkbox-group {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── FORM MODE SWITCHER ── */
+.form-mode-switcher {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.4rem;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+}
+
+.form-mode-btn {
+  background: transparent;
+  border: none;
+  padding: 0.65rem 1.3rem;
+  border-radius: 10px;
+  font-family: var(--font-disp);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-mode-btn .fms-icon {
+  font-size: 1rem;
+}
+
+.form-mode-btn:hover {
+  color: var(--white);
+}
+
+.form-mode-btn.active {
+  background: linear-gradient(135deg, rgba(0, 180, 216, 0.15), rgba(6, 214, 160, 0.15));
+  color: var(--white);
+  box-shadow: 0 4px 12px -4px rgba(0, 180, 216, 0.4);
+}
+
+.form-mode-btn.active[data-mode="internship"] {
+  background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(0, 180, 216, 0.15));
+  box-shadow: 0 4px 12px -4px rgba(6, 214, 160, 0.4);
+}
+
+/* ── INTERN-SPECIFIC FORM ELEMENTS ── */
+.form-tag-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+
+.form-tag-row .chk span {
+  font-size: 0.82rem;
+  padding: 0.3rem 0.1rem;
+}
+
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.radio-group .chk span {
+  font-size: 0.82rem;
+  padding: 0.3rem 0.1rem;
+}
+
+.radio-group input[type="radio"] {
+  accent-color: var(--green);
+}
+
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.4rem 0 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.form-hidden {
+  display: none !important;
+}
+
+.form-success-intern {
+  display: none;
+  background: rgba(6, 214, 160, 0.1);
+  border: 1px solid rgba(6, 214, 160, 0.3);
+  color: var(--green);
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-top: 0.8rem;
+  text-align: center;
+}
+
+select.form-input,
+select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all 0.25s var(--ease);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%2300B4D8' d='M6 8L0 0h12z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 10px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.15);
+}
+
+select option {
+  background: var(--card);
+  color: var(--white);
+}
+
+.internship-card a.apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(0, 180, 216, 0.06);
+  transition: all 0.25s var(--ease);
+}
+
+.internship-card a.apply-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  transform: translateX(3px);
 }
